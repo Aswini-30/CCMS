@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industry Dashboard - Carbon Credit Management</title>
+    <link rel="stylesheet" href="industry_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-leaf"></i> CarbonTech</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#" class="nav-item active" data-section="dashboard">
+                            <i class="icon fas fa-chart-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="mint">
+                            <i class="icon fas fa-coins"></i>
+                            <span>Mint Credits</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="burn">
+                            <i class="icon fas fa-fire-alt"></i>
+                            <span>Burn Credits</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="projects">
+                            <i class="icon fas fa-project-diagram"></i>
+                            <span>Project List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="transactions">
+                            <i class="icon fas fa-history"></i>
+                            <span>Transaction History</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn">
+                    <i class="icon fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Industry Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="wallet-info">
+                        <div class="wallet-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="wallet-details">
+                            <span class="industry-name" id="industryName">Loading...</span>
+                            <span class="wallet-address" id="walletAddress">Connecting...</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon credits-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Credits Owned</h3>
+                            <p class="stat-value" id="totalCredits">0</p>
+                            <span class="stat-label">CCT Tokens</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon burned-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Credits Used (Burned)</h3>
+                            <p class="stat-value" id="creditsBurned">0</p>
+                            <span class="stat-label">CCT Tokens</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon projects-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Available Projects</h3>
+                            <p class="stat-value" id="availableProjects">0</p>
+                            <span class="stat-label">Verified Projects</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon transactions-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Recent Transactions</h3>
+                            <p class="stat-value" id="recentTransactions">0</p>
+                            <span class="stat-label">This Month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-card">
+                        <h3>Carbon Credits Overview</h3>
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="bar" style="--height: 60%"></div>
+                                <div class="bar" style="--height: 80%"></div>
+                                <div class="bar" style="--height: 45%"></div>
+                                <div class="bar" style="--height: 90%"></div>
+                                <div class="bar" style="--height: 70%"></div>
+                                <div class="bar" style="--height: 55%"></div>
+                                <div class="bar" style="--height: 85%"></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>Jan</span>
+                                <span>Feb</span>
+                                <span>Mar</span>
+                                <span>Apr</span>
+                                <span>May</span>
+                                <span>Jun</span>
+                                <span>Jul</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mint Credits Section -->
+            <section id="mint" class="content-section">
+                <div class="section-header">
+                    <h2>Mint Credits</h2>
+                    <p>Purchase carbon credits from verified projects</p>
+                </div>
+                <div class="form-card">
+                    <form id="mintForm">
+                        <div class="form-group">
+                            <label for="mintProjectId">
+                                <i class="fas fa-project-diagram"></i>
+                                Project ID
+                            </label>
+                            <input type="number" id="mintProjectId" placeholder="Enter Project ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mintAmount">
+                                <i class="fas fa-coins"></i>
+                                Amount of Credits
+                            </label>
+                            <input type="number" id="mintAmount" placeholder="Enter amount" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mintPrivateKey">
+                                <i class="fas fa-key"></i>
+                                Private Key
+                            </label>
+                            <input type="password" id="mintPrivateKey" placeholder="Enter your private key" required>
+                        </div>
+                        <div class="form-info">
+                            <div class="info-item">
+                                <span class="info-label">Current Price:</span>
+                                <span class="info-value" id="creditPrice">0.001 ETH</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Total Cost:</span>
+                                <span class="info-value" id="totalCost">0 ETH</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-coins"></i>
+                            Mint Credits
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Burn Credits Section -->
+            <section id="burn" class="content-section">
+                <div class="section-header">
+                    <h2>Burn Credits</h2>
+                    <p>Offset your carbon emissions by burning credits</p>
+                </div>
+                <div class="form-card">
+                    <form id="burnForm">
+                        <div class="form-group">
+                            <label for="burnAmount">
+                                <i class="fas fa-fire-alt"></i>
+                                Amount of Credits to Burn
+                            </label>
+                            <input type="number" id="burnAmount" placeholder="Enter amount" min="1" required>
+                            <span class="input-hint">Your balance: <strong id="burnBalance">0</strong> CCT</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="burnPrivateKey">
+                                <i class="fas fa-key"></i>
+                                Private Key
+                            </label>
+                            <input type="password" id="burnPrivateKey" placeholder="Enter your private key" required>
+                        </div>
+                        <div class="burn-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>This action is irreversible. Burning credits will permanently remove them from your wallet.</p>
+                        </div>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-fire-alt"></i>
+                            Burn Credits
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Project List Section -->
+            <section id="projects" class="content-section">
+                <div class="section-header">
+                    <h2>Available Projects</h2>
+                    <p>Browse verified carbon credit projects</p>
+                </div>
+                <div class="projects-grid" id="projectsList">
+                    <!-- Projects will be loaded dynamically -->
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transaction History Section -->
+            <section id="transactions" class="content-section">
+                <div class="section-header">
+                    <h2>Transaction History</h2>
+                    <p>View all your carbon credit transactions</p>
+                </div>
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction Hash</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsList">
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>No transactions yet</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 id="successTitle">Success!</h3>
+            <p id="successMessage">Operation completed successfully.</p>
+            <div class="modal-details" id="modalDetails"></div>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <div class="modal-icon error">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3>Error!</h3>
+            <p id="errorMessage">An error occurred.</p>
+            <button class="btn btn-danger" onclick="closeErrorModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="industry_app.js"></script>
+</body>
+</html>
+
